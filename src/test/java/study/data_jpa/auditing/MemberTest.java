@@ -36,8 +36,6 @@ public class MemberTest {
         System.out.println("찾은 멤버 = " + findMember);
         System.out.println("findMember.getCreatedAt() = " + findMember.getCreatedAt());
         System.out.println("findMember.getUpdatedAt() = " + findMember.getUpdatedAt());
-        System.out.println("findMember.getCreatedBy() = " + findMember.getCreatedBy());
-        System.out.println("findMember.getUpdatedBy() = " + findMember.getUpdatedBy());
     }
 
 }

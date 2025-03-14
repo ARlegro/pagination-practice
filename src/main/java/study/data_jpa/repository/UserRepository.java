@@ -1,5 +1,8 @@
 package study.data_jpa.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.Window;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

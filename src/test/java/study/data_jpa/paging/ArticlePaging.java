@@ -1,7 +1,5 @@
 package study.data_jpa.paging;
 
-import jakarta.annotation.PostConstruct;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,14 +9,20 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import study.data_jpa.entity.Article;
 import study.data_jpa.repository.ArticleRepository;
+import study.data_jpa.service.ArticleService;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
 public class ArticlePaging {
 
     @Autowired
     ArticleRepository articleRepository;
+    @Autowired
+    private ArticleService articleService;
 
     @BeforeEach
     void setUp() {
@@ -28,6 +32,12 @@ public class ArticlePaging {
             String title = (i % 3 == 0) ? "Breaking News " + i : "Regular News " + i;
             articleRepository.save(new Article(title, "Content " + i, LocalDateTime.now().minusDays(i)));
         }
+    }
+
+    @Test
+    void findAllByTest(){
+        List<Article> articles = articleRepository.findAllBy();
+        assertThat(articles.size()).isEqualTo(20);
     }
 
     // 제목에 키워드가 포함된 기사 페이징 조회
@@ -43,7 +53,7 @@ public class ArticlePaging {
             System.out.println("현재 페이지 = " + ++currentPage);
             System.out.println("articlePage.getContent() = " + articlePage.getContent());
             System.out.println("articlePage.getTotalElements() = " + articlePage.getTotalElements());
-            Assertions.assertThat(articlePage.getSize()).isLessThanOrEqualTo(4);
+            assertThat(articlePage.getSize()).isLessThanOrEqualTo(4);
             pageRequest = articlePage.nextPageable();
         } while (articlePage.hasNext());
 
@@ -52,7 +62,23 @@ public class ArticlePaging {
     }
     // (추가 도전) 대소문자 구분 없이 검색
 
-
     // Slice
+    @Test
+    void ketSetPaging1(){
+        List<Article> articles = articleService.getArticlesByIterator();
+        assertThat(articles.size()).isEqualTo(10);
+        for (Article article : articles) {
+            System.out.println("article = " + article);
+        }
+    }
+
+    @Test
+    void ketSetPaging2(){
+        List<Article> articles = articleService.getArticlesByWhile();
+        assertThat(articles.size()).isEqualTo(20);
+        for (Article article : articles) {
+            System.out.println("article = " + article);
+        }
+    }
 
 }
