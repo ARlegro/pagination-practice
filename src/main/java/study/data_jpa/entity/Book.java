@@ -4,29 +4,16 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
-@Entity
+@Entity @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Book {
-
-    @Id @GeneratedValue
-    @Column(name = "author_id")
-    private Long id;
-
+public class Book extends RealBaseEntity{
     private String title;
 
     private LocalDate publicationDate;
-
-    public Book(String title, LocalDate publicationDate) {
-        this.title = title;
-        this.publicationDate = publicationDate;
-    }
-
-
 }

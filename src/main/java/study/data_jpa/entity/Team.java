@@ -4,24 +4,20 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static lombok.AccessLevel.*;
+@EqualsAndHashCode(callSuper = true)
 
 @Entity
 @Getter @Setter
 @NoArgsConstructor(access = PROTECTED)
-@ToString(of = {"id", "name"})
-public class Team {
-
-    @Id @GeneratedValue
-    private Long id;
+@AllArgsConstructor
+@ToString(of = {"name"})
+public class Team extends RealBaseEntity{
 
     private String name;
 

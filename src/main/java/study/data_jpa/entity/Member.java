@@ -1,22 +1,16 @@
 package study.data_jpa.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import static jakarta.persistence.FetchType.*;
+@EqualsAndHashCode(callSuper = true)
 
 @Entity
 @Getter @Setter
 @NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
-@ToString(of = {"id", "username", "age"}) // team을 toString에 넣으면 무한루프에 빠짐
+@ToString(of = {"username", "age"})
 public class Member extends BaseEntity {
-
-    @Id @GeneratedValue
-    @Column(name = "member_id")
-    private Long id;
 
     private String username;
     private int age;
