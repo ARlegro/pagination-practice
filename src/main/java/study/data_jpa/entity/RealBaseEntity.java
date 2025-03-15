@@ -7,14 +7,15 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.Instant;
+import java.util.UUID;
 
 @EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
 @Getter
 public class RealBaseEntity {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Id @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     @CreatedDate
     @Column(updatable = false, nullable = false)

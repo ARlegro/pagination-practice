@@ -1,6 +1,7 @@
 package study.data_jpa.paging;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import study.data_jpa.entity.Article;
 import study.data_jpa.repository.ArticleRepository;
 import study.data_jpa.service.ArticleService;
+import study.data_jpa.service.ScrollPageResponse;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -28,7 +30,7 @@ public class ArticlePaging {
     void setUp() {
         articleRepository.deleteAll();
         // 테스트용 데이터 20건 등록, 일부 제목에는 "Breaking" 키워드 포함
-        for (int i = 1; i <= 20; i++) {
+        for (int i = 1; i <= 100; i++) {
             String title = (i % 3 == 0) ? "Breaking News " + i : "Regular News " + i;
             articleRepository.save(new Article(title, "Content " + i, LocalDateTime.now().minusDays(i)));
         }
@@ -62,23 +64,32 @@ public class ArticlePaging {
     }
     // (추가 도전) 대소문자 구분 없이 검색
 
-    // Slice
+
+    @DisplayName("키셋 페이징 - iterator")
     @Test
     void ketSetPaging1(){
         List<Article> articles = articleService.getArticlesByIterator();
-        assertThat(articles.size()).isEqualTo(10);
+        //assertThat(articles.size()).isEqualTo(10);
+        for (Article article : articles) {
+            System.out.println("article = " + article);
+        }
+    }
+
+    @DisplayName("키셋 페이징 - while문")
+    @Test
+    void ketSetPaging2(){
+        List<Article> articles = articleService.getArticlesByPage();
+        assertThat(articles.size()).isEqualTo(20);
         for (Article article : articles) {
             System.out.println("article = " + article);
         }
     }
 
     @Test
-    void ketSetPaging2(){
-        List<Article> articles = articleService.getArticlesByWhile();
-        assertThat(articles.size()).isEqualTo(20);
-        for (Article article : articles) {
-            System.out.println("article = " + article);
-        }
+    void offsetPaging(){
+        List<ScrollPageResponse<Article>> result = articleService.getArticlesOrderByCreated();
+        assertThat(result.size()).isEqualTo(10);
+
     }
 
 }

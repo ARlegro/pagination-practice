@@ -24,4 +24,10 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
     List<Article> findFirstByOrderByContentAsc();
 
     Window<Article> findFirst10ByOrderByIdDesc(KeysetScrollPosition position);
+    Window<Article> findFirst10ByOrderByCreatedAtDesc(KeysetScrollPosition position);
+
+    Page<Article> findPageAllByOrderByIdDesc(Pageable pageable);
+    Page<Article> findPageAllByOrderByCreatedAtDesc(Pageable pageable);
+    Page<Article> findAllBy(Pageable pageable);
+
 }

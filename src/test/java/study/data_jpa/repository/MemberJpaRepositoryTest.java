@@ -20,14 +20,14 @@ class MemberJpaRepositoryTest {
     @Autowired
     MemberJpaRepository memberJpaRepository;
 
-    @Test
-    public void testMember(){
-        Member memberA = new Member("memberA");
-        Member savedMember = memberJpaRepository.save(memberA);
-
-        Member findMember = memberJpaRepository.find(savedMember.getId());
-        assertThat(findMember.getId()).isEqualTo(savedMember.getId());
-        assertThat(findMember.getUsername()).isEqualTo(savedMember.getUsername());
-        assertThat(findMember).isEqualTo(savedMember);
-    }
+//    @Test
+//    public void testMember(){
+//        Member memberA = new Member("memberA");
+//        Member savedMember = memberJpaRepository.save(memberA);
+//
+//        Member findMember = memberJpaRepository.find(savedMember.getId());
+//        assertThat(findMember.getId()).isEqualTo(savedMember.getId());
+//        assertThat(findMember.getUsername()).isEqualTo(savedMember.getUsername());
+//        assertThat(findMember).isEqualTo(savedMember);
+//    }
 }

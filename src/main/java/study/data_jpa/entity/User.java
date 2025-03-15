@@ -7,8 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @EqualsAndHashCode(callSuper = true)
-@Entity
-@Data
+@Entity @Data
 @NoArgsConstructor @AllArgsConstructor
 @Table(name = "users") // 테이블 이름을 users로 설정
 public class User extends RealBaseEntity{

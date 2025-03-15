@@ -13,6 +13,7 @@ import study.data_jpa.entity.Member;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
@@ -76,6 +77,8 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     @Modifying(clearAutomatically = true)
     @Query("UPDATE Member m SET m.age = :age WHERE m.age > :age")
     int bulkAgeLimit(@Param("age") int age);
+
+    Optional<Member> findById(UUID id);
 }
 
 

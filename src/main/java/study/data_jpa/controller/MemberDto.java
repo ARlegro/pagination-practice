@@ -3,9 +3,11 @@ package study.data_jpa.controller;
 
 import study.data_jpa.entity.Member;
 
-public record MemberDto(Long id, String name, int age) {
+import java.util.UUID;
+
+public record MemberDto(UUID id, String name, int age) {
     // 기존에 사용하던 정적 팩토리 메서드
-    public static MemberDto toDto(Long id, String name, int age) {
+    public static MemberDto toDto(UUID id, String name, int age) {
         return new MemberDto(id, name, age);
     }
 
